@@ -19,13 +19,13 @@ class Price
     @counter += 1
     @counter = 1 if @counter > 10
     case @counter
-    when 1..5
+    when 1..75
       @price[0]
-    when 5..8
+    when 75..85
       @price[1]
-    when 8..9
+    when 85..95
       @price[2]
-    when 9..10
+    when 95..100
       @price[3]
     end
   end
