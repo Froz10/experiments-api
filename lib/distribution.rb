@@ -17,7 +17,7 @@ class Price
 
   def price_distribution
     @counter += 1
-    @counter = 1 if @counter > 10
+    @counter = 1 if @counter > 100
     case @counter
     when 1..75
       @price[0]
