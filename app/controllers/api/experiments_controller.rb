@@ -8,11 +8,30 @@ class Api::ExperimentsController < ApplicationController
 
 
   def index
-    render json: @experiment
+    if request.headers.key? "Device-Token"
+      render json: {
+                      "experiments": [
+                        {
+                          "value": Experiment.select(:button_color)
+                          .where(token: @token)
+                          .pluck(:button_color)[0],
+                          "key": "button_color",
+                        },
+                        {
+                          "value": Experiment.select(:price)
+                          .where(token: @token)
+                          .pluck(:price)[0],
+                          "key": "price",
+                        },
+                      ]
+                    }
+      else
+        render json: {}, status: :forbidden
+      end
   end
 
-  def create
-    @experiment = Experiment.create experiment_params
+  def create   
+    @experiment = Experiment.create experiment_params 
   end
 
   private

@@ -1,7 +1,7 @@
 require 'distribution'
 
 class Experiment < ApplicationRecord
-  validates :token, uniqueness: true
+  validates :token, uniqueness: true, presence: true
   validates :button_color, presence: true
   validates :price, presence: true
 
