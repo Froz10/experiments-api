@@ -1,17 +1,19 @@
+# frozen_string_literal: true
+
 class Color
   def initialize
     @color = []
   end
-      
+
   def сolor_distribution
-    @color = %W[#FF0000 #00FF00 #0000FF] if @color.empty?
+    @color = %w[#FF0000 #00FF00 #0000FF] if @color.empty?
     @color.shift
   end
 end
 
 class Price
   def initialize
-    @price =  %W[10 20 5 50]
+    @price = %w[10 20 5 50]
     @counter = 0
   end
 

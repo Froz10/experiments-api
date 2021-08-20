@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'distribution'
 
 class Experiment < ApplicationRecord
@@ -17,5 +19,4 @@ class Experiment < ApplicationRecord
   def self.set_price
     @price.price_distribution
   end
-
 end
