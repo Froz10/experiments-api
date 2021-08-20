@@ -1,14 +1,14 @@
 class Api::ExperimentsController < ApplicationController
   before_action :get_header, only: [:index]
   before_action :set_default_values, only: [:index]
-  before_action :set_button_color, only: [:index], unless: :query_validation_to_db?
-  before_action :set_product_price, only: [:index], unless: :query_validation_to_db?
+  before_action :set_button_color, only: [:index], unless: :query_validation_to_db?, if: :query_validation_token?
+  before_action :set_product_price, only: [:index], unless: :query_validation_to_db?, if: :query_validation_token?
   before_action :experiment_params, only: [:index]
   before_action :create, only: [:index]
 
 
   def index
-    if request.headers.key? "Device-Token"
+    if query_validation_token?
       render json: {
                       "experiments": [
                         {
@@ -55,6 +55,10 @@ class Api::ExperimentsController < ApplicationController
   def query_validation_to_db?
     @query_to_db = Experiment.select(:token).pluck(:token)
     @query_to_db.include? @token
+  end
+
+  def query_validation_token?
+    request.headers.key? "Device-Token"
   end
 
   def experiment_params
