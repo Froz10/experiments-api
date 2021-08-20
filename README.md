@@ -14,3 +14,7 @@ rails db:migrate
 ```
 rails s
 ```
+### Testing
+```
+curl -H "Device-Token: test_user1" http://localhost:3000/api/experiments
+```
