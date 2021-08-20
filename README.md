@@ -1,9 +1,16 @@
-# README
-Project setup
+# experiments-back
+
+## Project setup
+```
 bundle install
+```
 
-Migrate database
+### Migrate database
+```
 rails db:migrate
+```
 
-Run server
+### Run server
+```
 rails s
+```
