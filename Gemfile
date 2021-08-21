@@ -16,13 +16,13 @@ gem 'sqlite3', '~> 1.4'
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'pry-rails'
-  gem 'rubocop', '~> 1.19', require: false
-  gem 'rubocop-performance', '~> 1.11', require: false
-  gem 'rubocop-rails', '~> 2.11', require: false
 end
 
 group :development do
   gem 'listen', '~> 3.2'
+  gem 'rubocop', '~> 1.19', require: false
+  gem 'rubocop-performance', '~> 1.11', require: false
+  gem 'rubocop-rails', '~> 2.11', require: false
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
