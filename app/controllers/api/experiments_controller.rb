@@ -11,20 +11,7 @@ module Api
 
     def index
       if query_validation_token?
-        render json: { experiments: [
-          {
-            value: Experiment.select(:button_color)
-                             .where(token: @token)
-                             .pluck(:button_color)[0],
-            key: 'button_color'
-          },
-          {
-            value: Experiment.select(:price)
-                             .where(token: @token)
-                             .pluck(:price)[0],
-            key: 'price'
-          }
-        ] }
+        @experiments = Experiment.select(:button_color, :price).where(token: @token)
       else
         render json: {}, status: :forbidden
       end
