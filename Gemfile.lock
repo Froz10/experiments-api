@@ -175,6 +175,9 @@ GEM
       activesupport (>= 4.2.0)
       rack (>= 1.1)
       rubocop (>= 1.7.0, < 2.0)
+    rubocop-rspec (2.2.0)
+      rubocop (~> 1.0)
+      rubocop-ast (>= 1.1.0)
     ruby-progressbar (1.11.0)
     spring (2.1.1)
     spring-watcher-listen (2.0.1)
@@ -214,6 +217,7 @@ DEPENDENCIES
   rubocop (~> 1.19)
   rubocop-performance (~> 1.11)
   rubocop-rails (~> 2.11)
+  rubocop-rspec
   spring
   spring-watcher-listen (~> 2.0.0)
   sqlite3 (~> 1.4)

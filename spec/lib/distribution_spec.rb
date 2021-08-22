@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
-require './lib/distribution.rb'
+require './lib/distribution'
 
 RSpec.describe 'Distribution' do
   it 'return distribution color' do
