@@ -16,6 +16,7 @@ gem 'sqlite3', '~> 1.4'
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'pry-rails'
+  gem 'rspec-rails', '~> 5.0.0'
 end
 
 group :development do
