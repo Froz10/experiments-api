@@ -3,14 +3,14 @@
 module Api
   class ExperimentsController < ApplicationController
     before_action :device_header, only: [:index]
-    before_action :default_values, only: [:index]
-    before_action :attribute_color, only: [:index], unless: :query_validation_to_db?, if: :query_validation_token?
-    before_action :attribute_price, only: [:index], unless: :query_validation_to_db?, if: :query_validation_token?
-    before_action :experiment_params, only: [:index]
-    before_action :create, only: [:index]
 
     def index
-      if query_validation_token?
+      if query_token_valid?
+        default_values
+        attribute_color if query_to_db_valid?
+        attribute_price if query_to_db_valid?
+        experiment_params
+        create
         @experiments = Experiment.select(:button_color, :price).where(token: @token)
       else
         render json: {}, status: :forbidden
@@ -40,12 +40,11 @@ module Api
       @price = Experiment.price
     end
 
-    def query_validation_to_db?
-      @query_to_db = Experiment.select(:token).pluck(:token)
-      @query_to_db.include? @token
+    def query_to_db_valid?
+      !Experiment.exists?(token: @token)
     end
 
-    def query_validation_token?
+    def query_token_valid?
       request.headers.key? 'Device-Token'
     end
 
