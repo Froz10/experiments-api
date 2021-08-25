@@ -33,7 +33,9 @@ class Price
     elsif @prices.count('20') < price2 then '20'
     elsif @prices.count('5') < price3 then '5'
     elsif @prices.count('50') < price4 then '50'
-    else '10'
+    # rubocop:disable Lint/DuplicateBranch: Duplicate branch body detected.
+    else '10' # This is necessary logic
+      # rubocop:enable Lint/DuplicateBranch: Duplicate branch body detected.
     end
   end
 end
