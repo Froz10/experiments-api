@@ -3,20 +3,23 @@
 require 'distribution'
 
 class Experiment < ApplicationRecord
-  validates :token, uniqueness: true, presence: true
+  validates :token, presence: true, uniqueness: true # rubocop:disable Rails/UniqueValidationWithoutIndex
   validates :button_color, presence: true
   validates :price, presence: true
 
-  def self.default_values
-    @color ||= Color.new
-    @price ||= Price.new
+  def self.colors
+    @colors ||= Color.new
   end
 
-  def self.set_color
-    @color.сolor_distribution
+  def self.prices
+    @prices ||= Price.new
   end
 
-  def self.set_price
-    @price.price_distribution
+  def self.color
+    @colors.distribution
+  end
+
+  def self.price
+    @prices.distribution
   end
 end

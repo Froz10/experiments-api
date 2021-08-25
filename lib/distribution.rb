@@ -2,33 +2,38 @@
 
 class Color
   def initialize
-    @color = []
+    @colors = []
   end
 
-  def сolor_distribution
-    @color = %w[#FF0000 #00FF00 #0000FF] if @color.empty?
-    @color.shift
+  def distribution
+    @colors = %w[#FF0000 #00FF00 #0000FF] if @colors.empty?
+    @colors.shift
   end
 end
 
 class Price
   def initialize
-    @price = %w[10 20 5 50]
+    @probability = [0.75, 0.1, 0.1, 0.05]
+    @prices = []
     @counter = 0
   end
 
-  def price_distribution
+  def distribution
     @counter += 1
-    @counter = 1 if @counter > 100
-    case @counter
-    when 1..75
-      @price[0]
-    when 75..85
-      @price[1]
-    when 85..95
-      @price[2]
-    when 95..100
-      @price[3]
+    price1 = (@counter * @probability[0]).round
+    price2 = (@counter * @probability[1]).round
+    price3 = (@counter * @probability[2]).round
+    price4 = (@counter * @probability[3]).round
+    @prices << calculation_price(price1, price2, price3, price4)
+    @prices.last
+  end
+
+  def calculation_price(price1, price2, price3, price4)
+    if @prices.count('10') < price1 then '10'
+    elsif @prices.count('20') < price2 then '20'
+    elsif @prices.count('5') < price3 then '5'
+    elsif @prices.count('50') < price4 then '50'
+    else '10'
     end
   end
 end

@@ -2,10 +2,10 @@
 
 module Api
   class ExperimentsController < ApplicationController
-    before_action :get_header, only: [:index]
-    before_action :set_default_values, only: [:index]
-    before_action :set_button_color, only: [:index], unless: :query_validation_to_db?, if: :query_validation_token?
-    before_action :set_product_price, only: [:index], unless: :query_validation_to_db?, if: :query_validation_token?
+    before_action :device_header, only: [:index]
+    before_action :default_values, only: [:index]
+    before_action :attribute_color, only: [:index], unless: :query_validation_to_db?, if: :query_validation_token?
+    before_action :attribute_price, only: [:index], unless: :query_validation_to_db?, if: :query_validation_token?
     before_action :experiment_params, only: [:index]
     before_action :create, only: [:index]
 
@@ -23,20 +23,21 @@ module Api
 
     private
 
-    def get_header
+    def device_header
       @token = request.headers['Device-Token']
     end
 
-    def set_default_values
-      Experiment.default_values
+    def default_values
+      Experiment.colors
+      Experiment.prices
     end
 
-    def set_button_color
-      @button_color = Experiment.set_color
+    def attribute_color
+      @button_color = Experiment.color
     end
 
-    def set_product_price
-      @price = Experiment.set_price
+    def attribute_price
+      @price = Experiment.price
     end
 
     def query_validation_to_db?

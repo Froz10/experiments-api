@@ -6,13 +6,13 @@ require './lib/distribution'
 RSpec.describe 'Distribution' do
   it 'return distribution color' do
     color = Color.new
-    distribution = color.сolor_distribution
+    distribution = color.distribution
     expect(distribution).not_to be_empty
   end
 
   it 'return distribution price' do
     price = Price.new
-    distribution = price.price_distribution
+    distribution = price.distribution
     expect(distribution).not_to be_empty
   end
 end
