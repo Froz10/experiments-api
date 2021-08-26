@@ -5,7 +5,7 @@ module Api
     before_action :device_header
 
     def index
-      if token_valid?
+      if header_valid?
         @experiments = Api::ExperimentService.call(@token)
       else
         render json: {}, status: :forbidden
@@ -18,7 +18,7 @@ module Api
       @token = request.headers['Device-Token']
     end
 
-    def token_valid?
+    def header_valid?
       request.headers.key? 'Device-Token'
     end
   end
