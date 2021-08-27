@@ -2,24 +2,20 @@
 
 module Api
   class ExperimentsController < ApplicationController
-    before_action :device_header
+    before_action :validate_header!
 
     def index
-      if header_valid?
-        @experiments = Api::ExperimentService.call(@token)
-      else
-        render json: {}, status: :forbidden
-      end
+      @experiment = Api::ExperimentService.call(device_header)
     end
 
     private
 
-    def device_header
-      @token = request.headers['Device-Token']
+    def validate_header!
+      render(json: {}, status: :forbidden) unless device_header
     end
 
-    def header_valid?
-      request.headers.key? 'Device-Token'
+    def device_header
+      @device_header ||= request.headers['Device-Token']
     end
   end
 end
