@@ -42,20 +42,20 @@ RSpec.describe 'Distribution' do
     end
   end
 
-  context 'when GET from device 20 times color' do
+  context 'when GET from device 60 times color' do
     it 'return distribution probability color #FF0000' do
-      20.times { arr << color.distribution }
-      expect(arr.count('#FF0000')).to eq(7)
+      60.times { arr << color.distribution }
+      expect(arr.count('#FF0000')).to eq(20)
     end
 
     it 'return distribution probability color #00FF00' do
-      20.times { arr << color.distribution }
-      expect(arr.count('#00FF00')).to eq(7)
+      60.times { arr << color.distribution }
+      expect(arr.count('#00FF00')).to eq(20)
     end
 
     it 'return distribution probability color #0000FF' do
-      20.times { arr << color.distribution }
-      expect(arr.count('#0000FF')).to eq(6)
+      60.times { arr << color.distribution }
+      expect(arr.count('#0000FF')).to eq(20)
     end
   end
 end
