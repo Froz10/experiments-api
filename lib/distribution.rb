@@ -2,10 +2,16 @@
 
 class Color
   def initialize
-    @colors = []
+    @colors = %w[#FF0000 #00FF00 #0000FF]
+    if Experiment.select(:button_color).pluck(:button_color).last.nil?
+      @colors
+    else
+      @index = @colors.index(Experiment.select(:button_color).pluck(:button_color).last)
+      @colors = @colors.drop(@index + 1)
+    end
   end
 
-  def distribution
+  def next_value
     @colors = %w[#FF0000 #00FF00 #0000FF] if @colors.empty?
     @colors.shift
   end
@@ -14,11 +20,11 @@ end
 class Price
   def initialize
     @probability = [0.75, 0.1, 0.1, 0.05]
-    @prices = []
-    @counter = 0
+    @prices = Experiment.select(:price).pluck(:price)
+    @counter = Experiment.maximum(:id).to_i
   end
 
-  def distribution
+  def next_value
     @counter += 1
     price1 = (@counter * @probability[0]).round
     price2 = (@counter * @probability[1]).round
