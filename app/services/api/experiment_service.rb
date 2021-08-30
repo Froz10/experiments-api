@@ -7,27 +7,26 @@ module Api
     end
 
     def call
-      default_values
-      attribute_color if query_to_db_valid?
-      attribute_price if query_to_db_valid?
-      experiment_params
-      @experiment = Experiment.create experiment_params
-      @experiments = Experiment.select(:button_color, :price).where(token: @token)
+      default_initialize
+      generate_color if query_to_db_valid?
+      generate_price if query_to_db_valid?
+      Experiment.create experiment_params
+      Experiment.select(:button_color, :price).where(token: @token)
     end
 
     private
 
-    def default_values
-      Experiment.colors
-      Experiment.prices
+    def default_initialize
+      Experiment.color
+      Experiment.price
     end
 
-    def attribute_color
-      @button_color = Experiment.color
+    def generate_color
+      @button_color = Experiment.color_distribution
     end
 
-    def attribute_price
-      @price = Experiment.price
+    def generate_price
+      @price = Experiment.price_distribution
     end
 
     def query_to_db_valid?

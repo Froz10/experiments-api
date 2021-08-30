@@ -7,19 +7,19 @@ class Experiment < ApplicationRecord
   validates :button_color, presence: true
   validates :price, presence: true
 
-  def self.colors
-    @colors ||= Color.new
-  end
-
-  def self.prices
-    @prices ||= Price.new
-  end
-
   def self.color
-    @colors.distribution
+    @color ||= Color.new
   end
 
   def self.price
-    @prices.distribution
+    @price ||= Price.new
+  end
+
+  def self.color_distribution
+    @color.next_value
+  end
+
+  def self.price_distribution
+    @price.next_value
   end
 end
