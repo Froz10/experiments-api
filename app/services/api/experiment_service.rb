@@ -7,7 +7,7 @@ module Api
     end
 
     def call
-      experiment_initialize
+      start_experiment
       generate_color if query_to_db_valid?
       generate_price if query_to_db_valid?
       Experiment.create experiment_params
@@ -16,7 +16,7 @@ module Api
 
     private
 
-    def experiment_initialize
+    def start_experiment
       Experiment.color
       Experiment.price
     end
