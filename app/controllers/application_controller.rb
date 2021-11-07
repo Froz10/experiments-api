@@ -1,4 +1,5 @@
 # frozen_string_literal: true
-
+##
+# This class ApplicationController.
 class ApplicationController < ActionController::API
 end

@@ -12,6 +12,7 @@ gem 'puma', '~> 4.1'
 gem 'rack-cors'
 gem 'rails', '~> 6.0.3', '>= 6.0.3.3'
 gem 'sqlite3', '~> 1.4'
+gem 'rdoc'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]

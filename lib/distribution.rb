@@ -1,6 +1,9 @@
 # frozen_string_literal: true
-
+##
+# This class represents the logic distibutions.
+# initializes the initial states of experiments Color.
 class Color
+  # initialize new object
   def initialize
     @colors = %w[#FF0000 #00FF00 #0000FF]
     if Experiment.select(:button_color).pluck(:button_color).last.nil?
@@ -10,20 +13,23 @@ class Color
       @colors = @colors.drop(@index + 1)
     end
   end
-
+  # Creates next value for colors.
   def next_value
     @colors = %w[#FF0000 #00FF00 #0000FF] if @colors.empty?
     @colors.shift
   end
 end
 
+# This class represents the logic distibutions.
+# initializes the initial states of experiments Price.
 class Price
+  # initialize new object
   def initialize
     @probability = [0.75, 0.1, 0.1, 0.05]
     @prices = Experiment.select(:price).pluck(:price)
     @counter = Experiment.maximum(:id).to_i
   end
-
+  # Creates next value for prices.
   def next_value
     @counter += 1
     price1 = (@counter * @probability[0]).round
@@ -34,6 +40,7 @@ class Price
     @prices.last
   end
 
+  # Calculates the cost according to the probability distribution.
   def calculation_price(price1, price2, price3, price4)
     if @prices.count('10') < price1 then '10'
     elsif @prices.count('20') < price2 then '20'
