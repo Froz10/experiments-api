@@ -3,6 +3,7 @@
 HTTP API for A/B testing:
 
 GET /api/experiments: returns the JSON with A/B experiments
+
 GET /api/statistics: returns the JSON statistic for a simple table of experiments 
 
 # usage
